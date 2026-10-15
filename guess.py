@@ -3,7 +3,7 @@ import random
 import time
 
 # ---------- Settings ----------
-DEBUG_SECRET = 42   # For testing, set to a number such as 42. Set back to None before your final commit.
+DEBUG_SECRET = None   # For testing, set to a number such as 42. Set back to None before your final commit.
 TIME_LIMIT = 60       # Seconds allowed in Time Challenge mode
 is_correct_guess = False # flag to track if the player guessed correctly
 
