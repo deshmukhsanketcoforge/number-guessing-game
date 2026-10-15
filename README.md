@@ -1,5 +1,39 @@
 # number-guessing-game
 
+A user friendly simple number game that currently supports classic mode. In Classic mode, user is expcted to guess a number between 0 to 100. 
+
+**Note**: Invalid inputs are not considered towards attempts used. Invalid inputs includes strings, empty strings, symbols, out of range numbers, floats, and negative integers
+
+-----
+
+## Prerequisites:
+
+Make sure following softwares are installed in your system. If not, please check official documentations or YouTube resources on how to install them on your machine.
+
+1. Python 3.10+
+2. Git 
+3. Github Desktop App
+
+> Make sure Git is configured using Personal Access Tokens (PAT) or Github Desktop or SSH (via oxygen). If you don't know how to do this please check youtube videos for suitable guide.
+
+> We recommend using Github Desktop, that's what we used for this project. But other methods works perfectly fine too.
+
+## Setup Instructions:
+
+1. Clone Github repo located at: https://github.com/deshmukhsanketcoforge/number-guessing-game using Github Desktop (You can do it using SSH or HTTP method as well)
+
+## How to tun the program:
+
+1. Open your preferred code editor
+2. Select "Open Folder" -> Select the cloned github repository
+3. Open "Terminal" and use command 
+
+> python3 guess.py
+
+**Note:** As per scope of feature 1 Classic mode, the program keeps running until you make correct guess 
+
+----
+
 ## Test Coverage
 
 | # | What I tested | What I did | Expected result | Actual result | Pass? |
