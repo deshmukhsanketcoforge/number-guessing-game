@@ -14,8 +14,8 @@ print("Welcome to the Number Guessing Game")
 low = 0
 high = 100
 
-# Unpecified attempts for feature 1: classic mode so using 3 for now
-attempts_left = 3
+# there is not attempt limit for featue 1: classic mode
+attempts_used = 0
 
 # ---------- Choose a mode ----------
 # Goal: keep asking until the player picks Classic or Time Challenge.
@@ -31,35 +31,33 @@ else:
 # ---------- Guess loop ----------
 # Goal: keep asking for guesses until the player wins, runs out of attempts, or runs out of time.
 
-while attempts_left > 0:
+while True:
     guess = input(f"Guess a number between {low} to {high}: ")
 
     # user input should be all digits, if not ask again
     if not guess.isdigit():
-        print("Please enter a valid whole number (e.g. 1, 2)")
-        print(f"You have {attempts_left} more attempts to guess!!")
+        print("Invalid Integer. Please enter a valid whole number (e.g. 1, 2)\n")
         continue
 
     # convert user input to int (as default is string input)
-    guess = int(input())
+    guess = int(guess)
 
     # user input is valid but out of range
     if (guess < low) or (guess > high):
-        print("Please enter a number within valid range {low} to {high}")
-        print(f"You have {attempts_left} more attempts to guess!!")
+        print("Out of range integer. Please enter a number within valid range {low} to {high}\n")
         continue
+
+    # valid input format within range, hence counted towards attempts used
+    attempts_used += 1
 
     if guess == secret:
         print("correct")
+        print(f"You guessed the secret number {secret} in {attempts_used} attempts!")
+        break
     elif guess < secret:
-        print("too low")
+        print("too low\n")
     else:
-        print("too high")
-
-    # player lost one attempt
-    attempts_left -= 1
-    
-    print(f"You have {attempts_left} more attempts to guess!!")
+        print("too high\n")
 
 # ---------- End of round ----------
 # Goal: show the result that matches how the round ended.
