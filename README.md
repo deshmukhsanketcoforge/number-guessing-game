@@ -78,3 +78,7 @@ Start guessing!
 | 20 | **Classic mode:** attempts used shown on correct guess | Set DEBUG_SECRET=42 and guessed 42 | Should show attempts used instead of attempts left. **FIX:** changed "attempts_left" logic to "attempts_used" | Program terminated but showed attempts left, fixed by switching to attempts_used | No |
 | 21 | **Difficulty level:** HARD range and attempt limit | Chose HARD and read the game header | Range should be `1`-`500` and attempt limit should be `10` | Range boundaries were incorrect, with attempts limit 10. **Fix:** Correct the value for high variable and verified by reexcution | No |
 | 22 | **Timed Challenge:** remaining time never goes negative | Waited past the time limit in a Timed Challenge, then entered a guess | Should end the game instead of showing negative time. **FIX:** added an if condition to break the while loop | Program went into negative time, fixed by adding a break condition | No |
+
+## Note:
+
+This assignment has been developed as part of Coforge Limited, Associate FDE training program. All rights are reserved by them.
