@@ -41,7 +41,7 @@ elif level == "2":
     attempts_allowed = 8
 elif level == "3":
     low = 1
-    high = 200
+    high = 500
     attempts_allowed = 10
 
 # ---------- Choose a mode ----------
