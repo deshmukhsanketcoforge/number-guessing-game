@@ -1,36 +1,54 @@
 # number-guessing-game
 
-A user friendly simple number game that currently supports classic mode. In Classic mode, user is expcted to guess a number between 0 to 100. 
+A user friendly simple number game that supports multiple difficulty levels and two game modes: Classic and Time Challenge. The program picks a secret number within a range based on the level you choose, and you try to guess it before you run out of attempts (or time).
 
-**Note**: Invalid inputs are not considered towards attempts used. Invalid inputs includes strings, empty strings, symbols, out of range numbers, floats, and negative integers
+### Levels
 
------
+| Level | Number range | Attempts allowed |
+|-------|--------------|------------------|
+|1. Easy | 1 to 50 | 10 |
+|2. Medium | 1 to 100 | 8 |
+|3. Hard | 1 to 200 | 10 |
 
-## Prerequisites:
+### Modes
+**Classic:** Guess the secret number within the allowed attempts. There is no time limit.
+**Time Challenge:** Same as Classic, but you must also guess the number within 60 seconds. The remaining time is shown before every guess. If time runs out, the round ends and the secret number is revealed.
+
+After every valid guess, the game tells you if your guess was "too low" or "too high" and how many attempts you have remaining.
+
+> Note: Invalid inputs are not counted towards attempts used. Invalid inputs include strings, empty strings, symbols, out of range numbers, floats, and negative integers.
+
+### Prerequisites:
 
 Make sure following softwares are installed in your system. If not, please check official documentations or YouTube resources on how to install them on your machine.
 
-1. Python 3.10+
-2. Git 
-3. Github Desktop App
+```txt
+Python 3.10+
+Git
+Github Desktop App
+```
 
-> Make sure Git is configured using Personal Access Tokens (PAT) or Github Desktop or SSH (via oxygen). If you don't know how to do this please check youtube videos for suitable guide.
+Make sure Git is configured using Personal Access Tokens (PAT) or Github Desktop or SSH (via oxygen). If you don't know how to do this please check youtube videos for suitable guide.
 
-> We recommend using Github Desktop, that's what we used for this project. But other methods works perfectly fine too.
+> We recommend using Github Desktop, that's what we used for this project. But other methods work perfectly fine too.
 
-## Setup Instructions:
+### Setup Instructions:
 
-1. Clone Github repo located at: https://github.com/deshmukhsanketcoforge/number-guessing-game using Github Desktop (You can do it using SSH or HTTP method as well)
+- Clone Github repo located at: https://github.com/deshmukhsanketcoforge/number-guessing-game using Github Desktop (You can do it using SSH or HTTP method as well)
+- How to run the program:
+Open your preferred code editor
+Select "Open Folder" -> Select the cloned github repository
+Open "Terminal" and use command
 
-## How to tun the program:
+```python
+python3 guess.py
+```
 
-1. Open your preferred code editor
-2. Select "Open Folder" -> Select the cloned github repository
-3. Open "Terminal" and use command 
+Choose a level (1-3) when prompted
+Choose a mode (1 for Classic, 2 for Time Challenge) when prompted
+Start guessing!
 
-> python3 guess.py
-
-**Note:** As per scope of feature 1 Classic mode, the program keeps running until you make correct guess 
+> Note: The round ends when you guess the number correctly, run out of attempts, or (in Time Challenge mode) run out of time. A message at the end tells you which of these happened and reveals the secret number if you did not win.
 
 ----
 
@@ -38,14 +56,29 @@ Make sure following softwares are installed in your system. If not, please check
 
 | # | What I tested | What I did | Expected result | Actual result | Pass? |
 |---|---------------|------------|-----------------|---------------|-------|
-| 1 |Classic mode: input out of range|Used out of range negative and positive integers|Proper error message with number of attempts left| Recived detailed error messgae with number of attempts left|Yes|
-| 2 |Classic mode: valid "integer" input within given input|Used valid integer for happy flow test|Should print either "too low", "too high" or "correct"|Program got stuck, due to multiple input statements, FIX: Changed the code by using existing input for int conversion|No|
-| 3 |Classic mode: tested for boundary cases for "high" variable|high variable was 100, so tested program for 99, 100, 101|Should get either "too low", "too high" or "correct" for 99, 100 and should get "invalid input" message for 101|Got edge cases covered as per expectations|Yes|
-| 4 |Classic mode: tested for boundary cases for "low" variable|low variable was 0, so tested program for -1, 0, 1|Should get either "invalid input" for -1; "too low", "too high" or "correct" for 0 and 1|Got edge cases covered as per expectations|Yes|
-| 5 |Classic mode: check number of attempts update for invalid and valid inputs|Tried all invalid inputs (floats, strings, empty strings, outside range, negative numbers)| Number of attempts left should not update for invalid inputs|Number of attempts left did not update for invalid inputs|Yes|
-| 6 |Classic mode: check if program exits after correct guess|Increase number of guesses to 10 and planned to use binary search to detrministically find the correct number within 10 attempts and range [0, 100]|Eventually should be able to get the correct guess and program should end with correct message|Program did display correct guess, but did not exit. FIX: added break statement inside while loop|No|
-| 7 |Classic mode: test using actual DEBUG_SECRET variable rather than binary search|Set DEBUG_SECRET=42 to check if we are able to validate the result|42 should be correct guess and program should terminate|Program did terminate, but instead of attempts left we need attempts used. Fix: update "attempts_left" logic to be "attempts_used"|No|
-| 8 |Difficulty level: check invalid inputs for seelcting difficulty level|Tried giving invalid inputs (empty string, string, any number other than 1,2 or 3)|Program should say "Invalid Input" and keep asking to pick diffculty level until a valid one is picked.|Program did stay in loop to keep asking for valid input|Yes|
-| 9 |Difficulty level: check if valid guess exits the program with correct message|Tested with DEBUG_SECRET = 42 and guessed the same number in first attempt with EASY difficulty|Program should say "Correct" and reveal a nice user friendly congratulations message|Program did exit with "correct" and congratulations message|Yes|
-| 10 |Difficulty level: in real mode try to guess incorrect 10 times in EASY mode, to see if game ends (due to player ran out of attempt) and reveals secret number|Guessed same "incorrect" number 10 times in EASY mode|Program should exit with proper "out of attempts" message and should reveal the secret number|Program did exit with appropriate message and revealed the secret number|Yes|
-| 11 |Difficulty level: validate range variable values and number of attempts for each mode|Tried with DEBUG_SECRET = 42, and for each mode tested if it takes correct number of attempts for valid/invalid inputs.|Code terminates and reveals secret number|Code terminated and revealed the secret number|Yes|
+| 1 | **Classic mode:** guess too low | Set DEBUG_SECRET=42 and guessed 10 | Should print "too low" | got "too low" | Yes |
+| 2 | **Classic mode:** guess too high | Set DEBUG_SECRET=42 and guessed 90 | Should print "too high" | got "too high" | Yes |
+| 3 | **Classic mode:** correct guess with right attempt count | Set DEBUG_SECRET=42 and guessed 42 on the first attempt in EASY mode | Should print "correct" with a congratulations message, report the attempts used, and the program should exit | Program did exit with "correct" and congratulations message with attempts used | Yes |
+| 4 | **Classic mode:** invalid input (letters) | Entered strings (e.g. "abc") as a guess | Should print "invalid input" and the number of attempts left should not change | Number of attempts left did not update for invalid inputs | Yes |
+| 5 | **Classic mode:** invalid input (blank entry) | Entered an empty string as a guess | Should print "invalid input" and the number of attempts left should not change | Number of attempts left did not update for invalid inputs | Yes |
+| 6 | **Classic mode:** number below range | Entered -1 (low is 0) and other out of range negative integers | Should print an error message with the number of attempts left, and attempts should not change | Received detailed error message with number of attempts left, attempts did not update | Yes |
+| 7 | **Classic mode:** number above range | Entered 101 (high is 100) and other out of range positive integers | Should print an error message with the number of attempts left, and attempts should not change | Received detailed error message with number of attempts left, attempts did not update | Yes |
+| 8 | **Difficulty level:** EASY range and attempt limit | Chose EASY and read the game header | Range should be `1`-`50` and attempt limit should be `10` | Range boundaries were correct, with attempts limit 10 | Yes |
+| 9 | **Difficulty level:** MEDIUM range and attempt limit | Chose MEDIUM and read the game header | Range should be `1`-`100` and attempt limit should be `8` | Range boundaries were correct, with attempts limit 8 | Yes |
+| 10 | **Out of attempts:** game ends | Guessed the same incorrect number 10 times in EASY mode | Should print an "out of attempts" message and the program should exit | Program did exit with appropriate message | Yes |
+| 11 | **Out of attempts:** secret number revealed | Same run as #11, checked the final message | Should reveal the secret number | Program revealed the secret number | Yes |
+| 12 | **Timed Challenge:** timeout ends the game | Started Timed Challenge and waited past the time limit without guessing | Should print "Time up!" and the program should exit | Got the time out message | Yes |
+| 13 | **Timed Challenge:** secret number revealed on timeout | Same run as #13, checked the final message | Should reveal the secret number (42) | Secret number was revealed after time out and it was real one | Yes |
+| 14 | **Timed Challenge:** correct guess after timeout is rejected | Used DEBUG_SECRET=42, waited past the time limit, then entered 42 | Should print "Time up!" and should NOT say it was correct | Correct guess AFTER timeout said "Time up!" as expected | Yes |
+| 15 | **Timed Challenge:** remaining time shown before first guess | Started Timed Challenge and looked at the first prompt | Remaining time should be displayed before the guess prompt | timer was being displayed before each guess on top | Yes |
+| 16 | **Timed Challenge:** remaining time shown before every guess | Made 3 wrong guesses and checked each prompt | Remaining time should be displayed before each guess and should decrease between guesses | Time was decreasing with each guess and it "Timed out" after 60 secs | Yes |
+| 17 | **Classic mode:** timer not shown | Chose Classic and made a few guesses | Remaining time should not be displayed at any prompt | Timer wasn't visible, only the number of attempts left and low, high or correct output were displayed | Yes |
+| 18 | **Classic mode:** program does not get stuck on valid input | Entered a valid integer within range | Should print "too low", "too high" or "correct" without asking for input twice. **Earlier bug:** program got stuck because of multiple input statements. **FIX:** reused the existing input for the int conversion | Program got stuck, fixed by reusing the existing input for int conversion | No |
+| 19 | **Classic mode:** program exits after correct guess | Guessed the correct number with 10 attempts available | Should print the correct message and exit. **Earlier bug:** program printed correct but kept running. **FIX:** added a break statement inside the while loop | Program displayed correct guess but did not exit, fixed with a break statement | No |
+| 20 | **Classic mode:** attempts used shown on correct guess | Set DEBUG_SECRET=42 and guessed 42 | Should show attempts used instead of attempts left. **FIX:** changed "attempts_left" logic to "attempts_used" | Program terminated but showed attempts left, fixed by switching to attempts_used | No |
+| 21 | **Difficulty level:** HARD range and attempt limit | Chose HARD and read the game header | Range should be `1`-`500` and attempt limit should be `10` | Range boundaries were incorrect, with attempts limit 10. **Fix:** Correct the value for high variable and verified by reexcution | No |
+| 22 | **Timed Challenge:** remaining time never goes negative | Waited past the time limit in a Timed Challenge, then entered a guess | Should end the game instead of showing negative time. **FIX:** added an if condition to break the while loop | Program went into negative time, fixed by adding a break condition | No |
+
+## Note:
+
+This assignment has been developed as part of Coforge Limited, Associate FDE training program. All rights are reserved by them.
