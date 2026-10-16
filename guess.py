@@ -56,10 +56,6 @@ while True:
     else:
         print("Invalid choice. Please enter 1 or 2.\n")
 
-TIME_LIMIT = None  # classic is default mode, which doesn't have any time limit
-if mode == "2":
-    TIME_LIMIT = 60  # seconds allowed in Time Challenge mode
-
 start_time = int(time.time())  # record the start time of the round
 
 # ---------- Set up the round ----------
@@ -76,9 +72,12 @@ else:
 while attempts_allowed > 0:
     if mode == "2":  # Time Challenge mode
         time_left = TIME_LIMIT - (int(time.time()) - start_time)
-        print(f"You have {time_left} seconds remaining.\n")
+        if time_left <= 0:
+            is_time_up = True
+            break
+        print(f"You have {time_left} seconds remaining.")
 
-    guess = input(f"Guess a number between {low} to {high}: ")
+    guess = input(f"\nGuess a number between {low} to {high}: ")
 
     # user input should be all digits, if not ask again
     if not guess.isdigit():
@@ -110,7 +109,7 @@ while attempts_allowed > 0:
     else:
         print("too high\n")
 
-    print(f"You have {attempts_allowed} attempts remaining.\n")
+    print(f"You have {attempts_allowed} attempts remaining.")
 
 # ---------- End of round ----------
 # Goal: show the result that matches how the round ended.
