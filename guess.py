@@ -7,6 +7,7 @@ DEBUG_SECRET = None             # For testing, set to a number such as 42. Set b
 TIME_LIMIT = 60                 # Seconds allowed in Time Challenge mode
 is_correct_guess = False        # flag to track if the player guessed correctly
 is_time_up = False              # flag to track if the player ran out of time
+attempts_used = 0               # track the number of attempts used
 
 print("Welcome to the Number Guessing Game")
 
@@ -69,7 +70,7 @@ else:
 # ---------- Guess loop ----------
 # Goal: keep asking for guesses until the player wins, runs out of attempts, or runs out of time.
 
-while attempts_allowed > 0:
+while attempts_allowed > attempts_used:
     if mode == "2":  # Time Challenge mode
         time_left = TIME_LIMIT - (int(time.time()) - start_time)
         if time_left <= 0:
@@ -93,7 +94,7 @@ while attempts_allowed > 0:
         continue
 
     # valid input format within range, hence counted towards attempts used
-    attempts_allowed -= 1
+    attempts_used += 1
 
     if guess == secret:
         if mode == "2":  # Time Challenge mode
@@ -109,7 +110,7 @@ while attempts_allowed > 0:
     else:
         print("too high\n")
 
-    print(f"You have {attempts_allowed} attempts remaining.")
+    print(f"You have {attempts_allowed - attempts_used} attempts remaining.")
 
 # ---------- End of round ----------
 # Goal: show the result that matches how the round ended.
@@ -117,6 +118,6 @@ while attempts_allowed > 0:
 if is_time_up:
     print(f"Time's up! The secret number was: {secret}. Better luck next time!")
 elif is_correct_guess:
-    print(f"Congratulations! You guessed the secret number {secret} correctly!")
+    print(f"Congratulations! You guessed the secret number {secret} correctly, in {attempts_used} attempts!")
 else:
     print(f"Game Over! Unfortunately you ran out of attempts. The secret number was: {secret}. Better luck next time!")
